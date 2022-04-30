@@ -1,94 +1,116 @@
 package jyborg.math.alg.field;
 
-import jyborg.math.alg.Algebraic;
+public class Frac
+        extends Quad<Frac> {
+    private long n = 0;
+    private long d = 1;
 
-public class Frac<N extends Number> extends Algebraic<Frac<N>>
-        implements Quad<Frac<N>> {
-    private N n;
-    private N d;
+    public Frac() {
+    }
 
-    @Override
-    public Frac<N> add(Frac<N> f) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public <N extends Number> Frac(long n) {
+        this.n = n;
+    }
+
+    public <N extends Number> Frac(long n, long d) {
+        long gcd = gcd(Math.abs(n), d);
+        this.n = n / gcd;
+        this.d = d / gcd;
+    }
+
+    public static long gcd(long a, long b) {
+        long r;
+        while (b > 0) {
+            r = a % b;
+            a = b;
+            b = r;
+        }
+        return a;
     }
 
     @Override
-    public Frac<N> zero() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    protected Frac plus(Frac f2) {
+        long n2 = f2.n;
+        long d2 = f2.d;
+        return new Frac(
+                n * d2 + n2 * d,
+                d * d2);
     }
 
     @Override
-    public Frac<N> neg(Frac<N> e) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public Frac zero() {
+        return new Frac();
     }
 
     @Override
-    public Frac<N> apply(Frac<N> a, Frac<N> b) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    protected Frac multiply(Frac f) {
+        return new Frac(
+                n * f.n,
+                d * f.d);
     }
 
     @Override
-    public Frac<N> inverse(Frac<N> e) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public Frac unit() {
+        return new Frac(1);
     }
 
     @Override
-    public Frac<N> identity() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public int compareTo(Frac f) {
+        return (int) (f.n * d - n * f.d);
     }
 
     @Override
-    public Frac<N> apply(Frac<N> a, Frac<N> b, Frac<N> c) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    protected Frac sqrt() {
+        long m = PerfectSquare.apply(n);
+        long c = PerfectSquare.apply(d);
+        return (m * m == n && c * c == d) ? new Frac(m, c) : nan();
     }
 
     @Override
-    public Frac<N> mul(Frac<N> f) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    protected double value() {
+        return ((double) n) / ((double) d);
     }
 
     @Override
-    public Frac<N> unit() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    protected Frac negate() {
+        return new Frac(-n, d);
     }
 
     @Override
-    public Frac<N> div(Frac<N> e) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    public boolean isNan() {
+        return d == 0;
     }
 
     @Override
-    public int compareTo(Frac<N> o) {
-        // TODO 自動生成されたメソッド・スタブ
-        return 0;
+    public Frac nan() {
+        return new Frac(1, 0);
     }
 
     @Override
-    public Frac<N> sqrt() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    protected Frac inverse() {
+        return new Frac(
+                (n < 0) ? -d : d,
+                Math.abs(n));
     }
 
-    @Override
-    public boolean isSquared() {
-        // TODO 自動生成されたメソッド・スタブ
-        return false;
+    @Deprecated
+    public long getN() {
+        return n;
     }
 
-    @Override
-    protected Frac<N> apply(Frac<N> e) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+    @Deprecated
+    public void setN(long n) {
+        this.n = n;
+    }
+
+    @Deprecated
+    public long getD() {
+        return d;
+    }
+
+    @Deprecated
+    public void setD(long d) {
+        this.d = d;
     }
 
 }

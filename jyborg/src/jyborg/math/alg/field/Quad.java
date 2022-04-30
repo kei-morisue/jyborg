@@ -1,12 +1,18 @@
 package jyborg.math.alg.field;
 
-import jyborg.math.alg.Algebraic;
-
-public interface Quad<E extends Algebraic<E>>
+public abstract class Quad<E extends Quad<E>>
         extends Field<E> {
 
-    public E sqrt();
+    public E sqr() {
+        return isNan() ? nan() : sqrt();
+    };
 
-    public boolean isSquared();
+    protected abstract E sqrt();
+
+    public Double val() {
+        return isNan() ? Double.NaN : value();
+    }
+
+    protected abstract double value();
 
 }
