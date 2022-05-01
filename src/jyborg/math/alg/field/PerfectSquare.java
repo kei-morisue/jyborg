@@ -14,6 +14,9 @@ public class PerfectSquare {
             228L, 233L, 241L, 249L };
 
     public static long apply(long n) {
+        if (n < 0L) {
+            return -1L;
+        }
         if (n == 0L || n == 1L) {
             return n;
         }

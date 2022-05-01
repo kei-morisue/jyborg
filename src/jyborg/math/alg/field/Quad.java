@@ -4,7 +4,10 @@ public abstract class Quad<E extends Quad<E>>
         extends Field<E> {
 
     public E sqr() {
-        return isNan() ? nan() : sqrt();
+        if (isNan() || compareTo(zero()) > 0) {
+            return nan();
+        }
+        return sqrt();
     };
 
     protected abstract E sqrt();

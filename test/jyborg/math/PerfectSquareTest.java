@@ -11,6 +11,7 @@ public class PerfectSquareTest {
 
     @Test
     void test1() {
+        assertEquals(-1L, PerfectSquare.apply(-12214L));
         assertEquals(0L, PerfectSquare.apply(0L));
         assertEquals(1L, PerfectSquare.apply(1L));
         assertEquals(16L, PerfectSquare.apply(256L));

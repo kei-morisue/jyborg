@@ -5,6 +5,7 @@ public class Frac
     private long n = 0;
     private long d = 1;
 
+    @Deprecated
     public Frac() {
     }
 

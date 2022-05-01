@@ -28,4 +28,12 @@ public abstract class Field<E extends Field<E>>
         return this.mul(e.inv());
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        return compareTo((E) obj) == 0;
+    }
 }
