@@ -1,6 +1,6 @@
 package jyborg.math.alg.field;
 
-public abstract class Quad<E extends Quad<E>>
+public abstract class FieldSqr<E extends FieldSqr<E>>
         extends Field<E> {
 
     public E sqr() {

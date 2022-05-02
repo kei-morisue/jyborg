@@ -1,4 +1,4 @@
-package jyborg.math.alg.nm;
+package jyborg.math.func;
 
 import jyborg.math.alg.field.Field;
 

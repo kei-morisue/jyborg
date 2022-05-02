@@ -1,7 +1,7 @@
 package jyborg.math.alg.field;
 
 public class Frac
-        extends Quad<Frac> {
+        extends FieldSqr<Frac> {
     private long n = 0;
     private long d = 1;
 

@@ -1,4 +1,4 @@
-package jyborg.math.alg.nm;
+package jyborg.math.func.nm;
 
 public class Newton {
     public static long apply(long c) {

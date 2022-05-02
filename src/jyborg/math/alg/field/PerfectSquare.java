@@ -2,7 +2,7 @@ package jyborg.math.alg.field;
 
 import java.util.Arrays;
 
-import jyborg.math.alg.nm.Newton;
+import jyborg.math.func.nm.Newton;
 
 public class PerfectSquare {
     private static Long[] m256 = { 0L, 1L, 4L, 9L, 16L, 17L, 25L, 33L, 36L, 41L,

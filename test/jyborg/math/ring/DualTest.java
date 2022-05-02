@@ -1,11 +1,11 @@
-package jyborg.math;
+package jyborg.math.ring;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import jyborg.math.alg.field.Dual;
 import jyborg.math.alg.field.Frac;
+import jyborg.math.alg.ring.Dual;
 
 class DualTest {
     private static final Frac K = new Frac(16);

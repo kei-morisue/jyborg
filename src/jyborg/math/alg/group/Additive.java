@@ -1,6 +1,4 @@
-package jyborg.math.alg;
-
-import jyborg.math.alg.group.AbelianGroup;
+package jyborg.math.alg.group;
 
 public abstract class Additive<E extends Additive<E>>
         implements AbelianGroup<E> {
@@ -25,4 +23,24 @@ public abstract class Additive<E extends Additive<E>>
     public E sub(E e) {
         return this.add(neg());
     };
+
+    public E x(int s) {
+        if (s == 0) {
+            return zero();
+        }
+        return (s > 0)
+                ? times(zero(), s)
+                : times(zero(), -s).neg();
+    }
+
+    private E me() {
+        return add(zero());
+    }
+
+    private E times(E e, int s) {
+        if (s == 0) {
+            return e;
+        }
+        return times(me().add(e), s - 1);
+    }
 }

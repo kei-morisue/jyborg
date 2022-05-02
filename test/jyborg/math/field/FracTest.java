@@ -1,4 +1,4 @@
-package jyborg.math;
+package jyborg.math.field;
 
 import static org.junit.jupiter.api.Assertions.*;
 

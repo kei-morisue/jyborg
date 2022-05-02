@@ -1,6 +1,4 @@
-package jyborg.math.alg;
-
-import jyborg.math.alg.group.Group;
+package jyborg.math.alg.group;
 
 public interface Multiplicatives<E extends Multiplicatives<E>>
         extends Group<E> {

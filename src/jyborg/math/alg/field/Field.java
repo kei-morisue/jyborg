@@ -1,7 +1,7 @@
 package jyborg.math.alg.field;
 
-import jyborg.math.alg.Additive;
-import jyborg.math.alg.Multiplicatives;
+import jyborg.math.alg.group.Additive;
+import jyborg.math.alg.group.Multiplicatives;
 
 public abstract class Field<E extends Field<E>>
         extends
@@ -36,4 +36,5 @@ public abstract class Field<E extends Field<E>>
         }
         return compareTo((E) obj) == 0;
     }
+
 }

@@ -1,11 +1,14 @@
-package jyborg.math.alg.field;
+package jyborg.math.alg.ring;
 
-public class Dual<F extends Quad<F>> extends Quad<Dual<F>> {
+import jyborg.math.alg.field.FieldSqr;
+
+public class Dual<F extends FieldSqr<F>> extends FieldSqr<Dual<F>> {
     private F v = null;
     private F d = null;
 
     @Deprecated
     public Dual() {
+        super();
     }
 
     public Dual(F v) {
@@ -18,7 +21,7 @@ public class Dual<F extends Quad<F>> extends Quad<Dual<F>> {
         this.d = d;
     }
 
-    public static <F extends Quad<F>> Dual<F> konst(F c) {
+    public static <F extends FieldSqr<F>> Dual<F> konst(F c) {
         return new Dual<F>(c, c.zero());
     }
 
@@ -53,7 +56,7 @@ public class Dual<F extends Quad<F>> extends Quad<Dual<F>> {
 
     @Override
     protected double value() {
-        return d.value();
+        return d.val();
     }
 
     @Override
