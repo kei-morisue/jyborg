@@ -11,21 +11,44 @@ public abstract class Field<E extends Field<E>>
         Comparable<E> {
 
     @Override
-    public E mul(E e) {
+    final public E mul(E e) {
         return isNan(e) ? nan() : multiply(e);
+    }
+
+    final public boolean isNeg() {
+        return compareTo(zero()) > 0;
     }
 
     protected abstract E multiply(E e);
 
     @Override
-    public E inv() {
-        return (isNan() || equals(zero())) ? nan() : inverse();
+    final public E inv() {
+        return (isNan() || equals(zero()))
+                ? nan()
+                : inverse();
     }
 
     protected abstract E inverse();
 
-    public E div(E e) {
+    final public E div(E e) {
         return this.mul(e.inv());
+    }
+
+    @SuppressWarnings("unchecked")
+    final public E pow(int s) {
+        if (s == 0) {
+            return unit();
+        }
+        return (s > 0)
+                ? power((E) this, unit(), s)
+                : power((E) this, unit(), -s).inv();
+    }
+
+    final private E power(E t, E e, int s) {
+        if (s == 0) {
+            return e;
+        }
+        return power(t, t.mul(e), s - 1);
     }
 
     @SuppressWarnings("unchecked")
@@ -36,5 +59,4 @@ public abstract class Field<E extends Field<E>>
         }
         return compareTo((E) obj) == 0;
     }
-
 }

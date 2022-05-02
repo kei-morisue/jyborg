@@ -19,63 +19,63 @@ class DualTest {
     @SuppressWarnings("deprecation")
     @Test
     void test1() {
-        assertEquals(K, KONST.getV());
-        assertEquals(ZERO, KONST.getD());
+        assertEquals(K, KONST.getA());
+        assertEquals(ZERO, KONST.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void test2() {
-        assertEquals(X, IDENT.getV());
-        assertEquals(ONE, IDENT.getD());
+        assertEquals(X, IDENT.getA());
+        assertEquals(ONE, IDENT.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void addTest1() {
         final Dual<Frac> c = KONST.add(KONST);
-        assertEquals(K.add(K), c.getV());
-        assertEquals(ZERO, c.getD());
+        assertEquals(K.add(K), c.getA());
+        assertEquals(ZERO, c.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void addTest2() {
         final Dual<Frac> c = IDENT.add(KONST);
-        assertEquals(K.add(X), c.getV());
-        assertEquals(ONE, c.getD());
+        assertEquals(K.add(X), c.getA());
+        assertEquals(ONE, c.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void addTest3() {
         final Dual<Frac> c = IDENT.add(IDENT);
-        assertEquals(X.add(X), c.getV());
-        assertEquals(TWO, c.getD());
+        assertEquals(X.add(X), c.getA());
+        assertEquals(TWO, c.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void mulTest1() {
         final Dual<Frac> c = KONST.mul(KONST);
-        assertEquals(K.mul(K), c.getV());
-        assertEquals(ZERO, c.getD());
+        assertEquals(K.pow(2), c.getA());
+        assertEquals(ZERO, c.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void mulTest2() {
         final Dual<Frac> c = IDENT.mul(KONST);
-        assertEquals(K.mul(X), c.getV());
-        assertEquals(K, c.getD());
+        assertEquals(K.mul(X), c.getA());
+        assertEquals(K, c.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void mulTest3() {
         final Dual<Frac> c = IDENT.mul(IDENT);
-        assertEquals(X.mul(X), c.getV());
-        assertEquals(X.add(X), c.getD());
+        assertEquals(X.pow(2), c.getA());
+        assertEquals(X.x(2), c.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -83,8 +83,8 @@ class DualTest {
     void mulTest4() {
         final Dual<Frac> a = IDENT.mul(IDENT);
         final Dual<Frac> c = IDENT.mul(a);
-        assertEquals(X.mul(X).mul(X), c.getV());
-        assertEquals(X.mul(X).add(X.mul(X)).add(X.mul(X)), c.getD());
+        assertEquals(X.pow(3), c.getA());
+        assertEquals(X.pow(2).x(3), c.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -92,79 +92,76 @@ class DualTest {
     void mulTest5() {
         final Dual<Frac> a = IDENT.mul(IDENT);
         final Dual<Frac> c = a.mul(KONST);
-        assertEquals(K.mul(X.mul(X)), c.getV());
-        assertEquals(K.mul(X).add(K.mul(X)), c.getD());
+        assertEquals(K.mul(X.pow(2)), c.getA());
+        assertEquals(K.mul(X).x(2), c.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void negTest1() {
         final Dual<Frac> a = KONST.neg();
-        assertEquals(K.neg(), a.getV());
-        assertEquals(ZERO, a.getD());
+        assertEquals(K.neg(), a.getA());
+        assertEquals(ZERO, a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void negTest2() {
         final Dual<Frac> a = IDENT.neg();
-        assertEquals(X.neg(), a.getV());
-        assertEquals(ONE.neg(), a.getD());
+        assertEquals(X.neg(), a.getA());
+        assertEquals(ONE.neg(), a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void invTest1() {
         final Dual<Frac> a = KONST.inv();
-        assertEquals(K.inv(), a.getV());
-        assertEquals(ZERO, a.getD());
+        assertEquals(K.inv(), a.getA());
+        assertEquals(ZERO, a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void invTest2() {
         final Dual<Frac> a = IDENT.inv();
-        assertEquals(X.inv(), a.getV());
-        assertEquals(X.mul(X).inv().neg(), a.getD());
+        assertEquals(X.inv(), a.getA());
+        assertEquals(X.pow(-2).neg(), a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void invTest3() {
         final Dual<Frac> a = IDENT.add(KONST).inv();
-        assertEquals(K.add(X).inv(), a.getV());
+        assertEquals(K.add(X).inv(), a.getA());
         assertEquals(
-                K.add(X).mul(K.add(X)).inv().neg(),
-                a.getD());
+                K.add(X).pow(-2).neg(),
+                a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void invTest4() {
         final Dual<Frac> a = IDENT.mul(IDENT).inv();
-        assertEquals(X.mul(X).inv(), a.getV());
-        Frac x3 = X.mul(X).mul(X);
-        assertEquals(
-                x3.inv().neg().add(x3.inv().neg()),
-                a.getD());
+        assertEquals(X.pow(-2), a.getA());
+        assertEquals(X.pow(-3).x(-2), a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void invTest5() {
         final Dual<Frac> a = KONST.mul(IDENT).mul(IDENT).inv();
-        Frac x2k = X.mul(X).mul(K);
+        Frac x2k = X.pow(2).mul(K);
         Frac x3k = X.mul(x2k);
-        assertEquals(x2k.inv(), a.getV());
-        assertEquals(x3k.inv().add(x3k.inv()).neg(), a.getD());
+        assertEquals(x2k.inv(), a.getA());
+        assertEquals(x3k.inv().x(-2), a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void invTest6() {
         final Dual<Frac> a = new Dual<Frac>(X.zero()).inv();
-        assertEquals(X.nan(), a.getV());
-        assertEquals(X.nan(), a.getD());
+        assertEquals(X.nan(), a.getA());
+        assertEquals(X.nan(), a.getB());
         assert (a.isNan());
 
     }
@@ -173,8 +170,8 @@ class DualTest {
     @Test
     void sqrtTest1() {
         final Dual<Frac> a = KONST.sqr();
-        assertEquals(K.sqr(), a.getV());
-        assertEquals(ZERO, a.getD());
+        assertEquals(K.sqr(), a.getA());
+        assertEquals(ZERO, a.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -182,8 +179,8 @@ class DualTest {
     void sqrtTest2() {
         final Dual<Frac> a = IDENT.sqr();
         Frac sqr = X.sqr();
-        assertEquals(sqr, a.getV());
-        assertEquals(sqr.add(sqr).inv(), a.getD());
+        assertEquals(sqr, a.getA());
+        assertEquals(sqr.x(2).inv(), a.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -191,24 +188,24 @@ class DualTest {
     void sqrtTest3() {
         final Dual<Frac> a = KONST.add(IDENT).sqr();
         Frac sqrXK = X.add(K).sqr();
-        assertEquals(sqrXK, a.getV());
-        assertEquals(sqrXK.add(sqrXK).inv(), a.getD());
+        assertEquals(sqrXK, a.getA());
+        assertEquals(sqrXK.x(2).inv(), a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void sqrtTest4() {
         final Dual<Frac> a = IDENT.mul(IDENT).sqr();
-        assertEquals(X, a.getV());
-        assertEquals(ONE, a.getD());
+        assertEquals(X, a.getA());
+        assertEquals(ONE, a.getB());
     }
 
     @SuppressWarnings("deprecation")
     @Test
     void sqrtTest5() {
         final Dual<Frac> a = new Dual<Frac>(X.neg()).sqr();
-        assertEquals(X.nan(), a.getV());
-        assertEquals(X.nan(), a.getD());
+        assertEquals(X.nan(), a.getA());
+        assertEquals(X.nan(), a.getB());
         assert (a.isNan());
     }
 }

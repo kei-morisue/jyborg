@@ -3,8 +3,8 @@ package jyborg.math.alg.field;
 public abstract class FieldSqr<E extends FieldSqr<E>>
         extends Field<E> {
 
-    public E sqr() {
-        if (isNan() || compareTo(zero()) > 0) {
+    final public E sqr() {
+        if (isNan() || isNeg()) {
             return nan();
         }
         return sqrt();
@@ -12,7 +12,7 @@ public abstract class FieldSqr<E extends FieldSqr<E>>
 
     protected abstract E sqrt();
 
-    public Double val() {
+    final public Double val() {
         return isNan() ? Double.NaN : value();
     }
 

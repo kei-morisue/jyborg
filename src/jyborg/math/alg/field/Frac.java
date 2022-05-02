@@ -114,4 +114,11 @@ public class Frac
         this.d = d;
     }
 
+    @Override
+    public String toString() {
+        if (isNan()) {
+            return "nan";
+        }
+        return n + "/" + d;
+    }
 }

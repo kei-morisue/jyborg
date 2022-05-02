@@ -69,4 +69,49 @@ public class FieldTest {
         assertEquals(24L * 256L, b.getN());
         assertEquals(5L, b.getD());
     }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void powTest1() {
+        final Frac a = new Frac(24, 8);
+        final Frac b = a.pow(2);
+        assertEquals(9L, b.getN());
+        assertEquals(1L, b.getD());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void powTest2() {
+        final Frac a = new Frac(24, 5);
+        final Frac b = a.pow(2);
+        assertEquals(24L * 24L, b.getN());
+        assertEquals(25L, b.getD());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void powTest3() {
+        final Frac a = new Frac(24, 5);
+        final Frac b = a.pow(-3);
+        assertEquals(125L, b.getN());
+        assertEquals(24L * 24L * 24L, b.getD());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void powTest4() {
+        final Frac a = new Frac(24, 5);
+        final Frac b = a.pow(0);
+        assertEquals(1L, b.getN());
+        assertEquals(1L, b.getD());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void powTest5() {
+        final Frac a = new Frac(24, 5);
+        final Frac b = a.pow(-0);
+        assertEquals(1L, b.getN());
+        assertEquals(1L, b.getD());
+    }
 }

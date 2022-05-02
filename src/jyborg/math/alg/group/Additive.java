@@ -2,13 +2,13 @@ package jyborg.math.alg.group;
 
 public abstract class Additive<E extends Additive<E>>
         implements AbelianGroup<E> {
-    public E add(E e) {
+    final public E add(E e) {
         return isNan(e) ? nan() : plus(e);
     }
 
     public abstract E zero();
 
-    public E neg() {
+    final public E neg() {
         return isNan() ? nan() : negate();
     };
 
@@ -16,31 +16,28 @@ public abstract class Additive<E extends Additive<E>>
 
     protected abstract E negate();
 
-    protected boolean isNan(E e) {
+    final protected boolean isNan(E e) {
         return e.isNan() || this.isNan();
     }
 
-    public E sub(E e) {
+    final public E sub(E e) {
         return this.add(neg());
     };
 
-    public E x(int s) {
+    @SuppressWarnings("unchecked")
+    final public E x(int s) {
         if (s == 0) {
             return zero();
         }
         return (s > 0)
-                ? times(zero(), s)
-                : times(zero(), -s).neg();
+                ? times((E) this, zero(), s)
+                : times((E) this, zero(), -s).neg();
     }
 
-    private E me() {
-        return add(zero());
-    }
-
-    private E times(E e, int s) {
+    final private E times(E t, E e, int s) {
         if (s == 0) {
             return e;
         }
-        return times(me().add(e), s - 1);
+        return times(t, t.add(e), s - 1);
     }
 }
