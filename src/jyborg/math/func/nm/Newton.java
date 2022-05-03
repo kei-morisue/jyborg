@@ -10,7 +10,7 @@ public class Newton {
             }
             e = next;
         }
-        return e;
+        return -1L;
     }
 
     //TODO extend to arbitrary functions

@@ -38,7 +38,7 @@ public abstract class Binarion<F extends FieldSqr<F>, B extends Binarion<F, B>>
     }
 
     @Override
-    final public boolean isNan() {
+    public boolean isNan() {
         return a.isNan() || b.isNan();
     }
 

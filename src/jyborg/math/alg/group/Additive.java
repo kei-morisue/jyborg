@@ -21,7 +21,7 @@ public abstract class Additive<E extends Additive<E>>
     }
 
     final public E sub(E e) {
-        return this.add(neg());
+        return this.add(e.neg());
     };
 
     @SuppressWarnings("unchecked")

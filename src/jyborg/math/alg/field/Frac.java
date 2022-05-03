@@ -119,6 +119,6 @@ public class Frac
         if (isNan()) {
             return "nan";
         }
-        return n + "/" + d;
+        return n + (d == 1 ? "" : "/" + d);
     }
 }
