@@ -43,13 +43,6 @@ public abstract class Binarion<F extends FieldSqr<F>, B extends Binarion<F, B>>
     }
 
     @Override
-    final public int compareTo(B o) {
-        int ca = a.compareTo(o.a);
-        int cb = b.compareTo(o.b);
-        return (ca == 0 && cb == 0) ? 0 : -1;
-    }
-
-    @Override
     public String toString() {
         if (isNan()) {
             return "nan";

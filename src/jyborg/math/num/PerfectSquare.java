@@ -1,8 +1,8 @@
-package jyborg.math.alg.field;
+package jyborg.math.num;
 
 import java.util.Arrays;
 
-import jyborg.math.func.nm.Newton;
+import jyborg.math.ana.nm.Newton;
 
 public class PerfectSquare {
     private static Long[] m256 = { 0L, 1L, 4L, 9L, 16L, 17L, 25L, 33L, 36L, 41L,
@@ -21,9 +21,9 @@ public class PerfectSquare {
             return n;
         }
         if (Arrays.asList(m256).contains(n % 256L)) {
-            return (long) Math.floor(Math.sqrt(n));
+            return Newton.apply(n);
         }
-        return Newton.apply(n);
+        return -1L;
     }
 
 }

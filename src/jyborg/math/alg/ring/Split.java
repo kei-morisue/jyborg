@@ -152,6 +152,20 @@ public class Split<F extends FieldSqr<F>>
     }
 
     @Override
+    public int compareTo(Split<F> o) {
+        int ca = a.compareTo(o.a);
+        int cb = b.compareTo(o.b);
+        if (ca == 0) {
+            return cb;
+        }
+        if (cb == 0) {
+            return ca;
+        }
+        int c = a.sub(o.a).pow(2).compareTo(r.mul(b.sub(o.b).pow(2)));
+        return ca * cb * c;
+    }
+
+    @Override
     public String toString() {
         return isNan() ? "nan" : super.toString() + "r" + r;
     }

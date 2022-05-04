@@ -1,4 +1,4 @@
-package jyborg.math.func;
+package jyborg.math.ana;
 
 import jyborg.math.alg.field.Field;
 

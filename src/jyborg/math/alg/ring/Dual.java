@@ -85,4 +85,11 @@ public class Dual<F extends FieldSqr<F>>
                 b.neg());
     }
 
+    @Override
+    public int compareTo(Dual<F> o) {
+        int ca = a.compareTo(o.a);
+        int cb = b.compareTo(o.b);
+        return (ca == 0 && cb == 0) ? 0 : 1;
+    }
+
 }

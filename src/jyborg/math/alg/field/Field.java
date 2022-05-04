@@ -16,7 +16,7 @@ public abstract class Field<E extends Field<E>>
     }
 
     final public boolean isNeg() {
-        return compareTo(zero()) > 0;
+        return compareTo(zero()) < 0;
     }
 
     protected abstract E multiply(E e);

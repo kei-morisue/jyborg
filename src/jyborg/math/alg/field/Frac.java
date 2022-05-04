@@ -1,6 +1,8 @@
 package jyborg.math.alg.field;
 
-public class Frac
+import jyborg.math.num.PerfectSquare;
+
+public final class Frac
         extends FieldSqr<Frac> {
     private long n = 0;
     private long d = 1;
@@ -9,11 +11,11 @@ public class Frac
     public Frac() {
     }
 
-    public <N extends Number> Frac(long n) {
+    public Frac(long n) {
         this.n = n;
     }
 
-    public <N extends Number> Frac(long n, long d) {
+    public Frac(long n, long d) {
         long gcd = gcd(Math.abs(n), d);
         this.n = n / gcd;
         this.d = d / gcd;
@@ -57,14 +59,19 @@ public class Frac
 
     @Override
     public int compareTo(Frac f) {
-        return (int) (f.n * d - n * f.d);
+        long diff = f.n * d - n * f.d;
+        return (diff == 0)
+                ? 0
+                : (diff > 0)
+                        ? -1
+                        : 1;
     }
 
     @Override
     protected Frac sqrt() {
         long m = PerfectSquare.apply(n);
         long c = PerfectSquare.apply(d);
-        return (m * m == n && c * c == d) ? new Frac(m, c) : nan();
+        return (m == -1L || c == -1L) ? nan() : new Frac(m, c);
     }
 
     @Override
