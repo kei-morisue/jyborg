@@ -66,11 +66,6 @@ public class Split<F extends FieldSqr<F>>
             if (t.isNan()) {
                 return nan();
             }
-            return new Split<F>(
-                    b.div(t.x(2)),
-                    t,
-                    r);
-
         }
         return new Split<F>(
                 b.div(t.x(2)),
