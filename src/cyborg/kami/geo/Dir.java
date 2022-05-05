@@ -10,7 +10,7 @@ public final class Dir<F extends FieldSqr<F>>
         super(x, y);
     }
 
-    public <D extends D0<F, D>> D get(D d) {
+    public <D extends D0<F, D>> D from(D d) {
         return d.createInstance(
                 this.x.add(d.getX()),
                 this.y.add(d.getY()));

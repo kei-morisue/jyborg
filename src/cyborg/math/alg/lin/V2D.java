@@ -57,13 +57,8 @@ public abstract class V2D<F extends FieldSqr<F>, V extends V2D<F, V>>
         return n().prd(v);
     }
 
-    public Matrix2x2<F, V> ketbra(V v) {
-        //        return new Matrix2x2<F, V>(
-        //                x.mul(v.x),
-        //                x.mul(v.y),
-        //                y.mul(v.x),
-        //                y.mul(v.y));
-        return new Matrix2x2<F, V>(
+    public M2x2<F, V> ketbra(V v) {
+        return new M2x2<F, V>(
                 scale(v.x),
                 scale(v.y));
     }

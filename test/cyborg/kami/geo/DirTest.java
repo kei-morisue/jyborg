@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import cyborg.math.alg.field.Frac;
-import cyborg.math.alg.lin.Matrix2x2;
+import cyborg.math.alg.lin.AbstractM2x2;
+import cyborg.math.alg.lin.M2x2;
 
 public class DirTest {
     private static Dir<Frac> u = dir(4L, 3L);
@@ -76,25 +77,25 @@ public class DirTest {
         assertEquals(new Frac(1L), c.getY());
     }
 
-    @SuppressWarnings("deprecation")
     @Test
     void ketbraTest1() {
-        Matrix2x2<Frac, Dir<Frac>> c = u.ketbra(v);
-        assertEquals(
-                new Dir<Frac>(
-                        new Frac(12L),
-                        new Frac(9L)),
-                c.getAb());
-        assertEquals(
-                new Dir<Frac>(
-                        new Frac(-8L),
-                        new Frac(-6L)),
-                c.getCd());
+        M2x2<Frac, Dir<Frac>> c = u.ketbra(v);
+        assertEquals(mx(
+                dir(12L, 9L),
+                dir(-8L, -6L)), c);
     }
 
     private static Dir<Frac> dir(long x, long y) {
         return new Dir<Frac>(
                 new Frac(x),
                 new Frac(y));
+    }
+
+    private static AbstractM2x2<Frac, Dir<Frac>> mx(
+            Dir<Frac> x,
+            Dir<Frac> y) {
+        return new M2x2<Frac, Dir<Frac>>(
+                x,
+                y);
     }
 }

@@ -1,11 +1,11 @@
-package cyborg.kami.fold;
+package cyborg.kami.ori;
 
 import cyborg.kami.geo.Line;
 import cyborg.kami.geo.Seg;
 import cyborg.kami.geo.D0Vertex;
 import cyborg.math.alg.field.FieldSqr;
 
-public interface OriAxiom<F extends FieldSqr<F>> {
+public interface Axiom<F extends FieldSqr<F>> {
 
     public Line<F> apply(
             D0Vertex<F> v1,
