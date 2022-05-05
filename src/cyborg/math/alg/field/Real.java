@@ -4,10 +4,6 @@ public final class Real
         extends FieldSqr<Real> {
     private Double v = 0.0;
 
-    @Deprecated
-    public Real() {
-    }
-
     public <V extends Number> Real(V v) {
         this.v = v.doubleValue();
     }
@@ -19,7 +15,7 @@ public final class Real
 
     @Override
     public Real zero() {
-        return new Real();
+        return new Real(0.0);
     }
 
     @Override

@@ -7,10 +7,6 @@ public final class Frac
     private long n = 0;
     private long d = 1;
 
-    @Deprecated
-    public Frac() {
-    }
-
     public Frac(long n) {
         this.n = n;
     }
@@ -42,7 +38,7 @@ public final class Frac
 
     @Override
     public Frac zero() {
-        return new Frac();
+        return new Frac(0L);
     }
 
     @Override
@@ -128,4 +124,5 @@ public final class Frac
         }
         return n + (d == 1 ? "" : "/" + d);
     }
+
 }

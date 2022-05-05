@@ -1,8 +1,7 @@
-package cyborg.kami.d0.d1.d2;
+package cyborg.kami.geo;
 
-import cyborg.kami.d0.Vertex;
 import cyborg.math.alg.field.FieldSqr;
 
 public class Face<F extends FieldSqr<F>> {
-    private Vertex<F> v;
+    private D0Vertex<F> v;
 }

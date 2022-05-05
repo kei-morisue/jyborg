@@ -7,15 +7,12 @@ public abstract class Binarion<F extends FieldSqr<F>, B extends Binarion<F, B>>
     protected F a = null;
     protected F b = null;
 
-    @Deprecated
-    public Binarion() {
-        super();
-    }
-
     protected Binarion(F a, F b) {
         this.a = a;
         this.b = b;
     }
+
+    abstract B createInstance(F a, F b);
 
     @Deprecated
     final public F getA() {
@@ -30,6 +27,41 @@ public abstract class Binarion<F extends FieldSqr<F>, B extends Binarion<F, B>>
     @Deprecated
     final public F getB() {
         return b;
+    }
+
+    @Override
+    public B unit() {
+        return createInstance(
+                a.unit(),
+                b.zero());
+    }
+
+    @Override
+    protected B negate() {
+        return createInstance(
+                a.neg(),
+                b.neg());
+    }
+
+    @Override
+    public B nan() {
+        return createInstance(
+                a.nan(),
+                b.nan());
+    }
+
+    @Override
+    public B zero() {
+        return createInstance(
+                a.zero(),
+                b.zero());
+    }
+
+    @Override
+    protected B plus(B e) {
+        return createInstance(
+                a.add(e.a),
+                b.add(e.b));
     }
 
     @Deprecated

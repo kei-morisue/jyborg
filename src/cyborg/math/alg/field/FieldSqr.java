@@ -1,7 +1,9 @@
 package cyborg.math.alg.field;
 
+import java.io.Serializable;
+
 public abstract class FieldSqr<E extends FieldSqr<E>>
-        extends Field<E> {
+        extends Field<E> implements Serializable {
 
     final public E sqr() {
         if (isNan() || isNeg()) {

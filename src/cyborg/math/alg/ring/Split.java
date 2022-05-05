@@ -6,11 +6,6 @@ public class Split<F extends FieldSqr<F>>
         extends Binarion<F, Split<F>> {
     private F r;
 
-    @Deprecated
-    public Split() {
-        super();
-    }
-
     public Split(F v, F r) {
         super(v, v.zero());
         if (r.sqr().isNan()) {
@@ -96,46 +91,6 @@ public class Split<F extends FieldSqr<F>>
                 r);
     }
 
-    @Override
-    public Split<F> unit() {
-        return new Split<F>(
-                a.unit(),
-                b.zero(),
-                r);
-    }
-
-    @Override
-    public Split<F> nan() {
-        return new Split<F>(
-                a.nan(),
-                b.nan(),
-                r);
-    }
-
-    @Override
-    public Split<F> zero() {
-        return new Split<F>(
-                a.zero(),
-                b.zero(),
-                r);
-    }
-
-    @Override
-    protected Split<F> plus(Split<F> e) {
-        return new Split<F>(
-                a.add(e.a),
-                b.add(e.b),
-                r);
-    }
-
-    @Override
-    protected Split<F> negate() {
-        return new Split<F>(
-                a.neg(),
-                b.neg(),
-                r);
-    }
-
     @Deprecated
     public F getR() {
         return r;
@@ -163,5 +118,10 @@ public class Split<F extends FieldSqr<F>>
     @Override
     public String toString() {
         return isNan() ? "nan" : super.toString() + "r" + r;
+    }
+
+    @Override
+    Split<F> createInstance(F a, F b) {
+        return new Split<F>(a, b, r);
     }
 }

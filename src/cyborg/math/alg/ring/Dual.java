@@ -5,11 +5,6 @@ import cyborg.math.alg.field.FieldSqr;
 public class Dual<F extends FieldSqr<F>>
         extends Binarion<F, Dual<F>> {
 
-    @Deprecated
-    public Dual() {
-        super();
-    }
-
     public Dual(F v) {
         super(v, v.unit());
     }
@@ -51,45 +46,15 @@ public class Dual<F extends FieldSqr<F>>
     }
 
     @Override
-    public Dual<F> unit() {
-        return new Dual<F>(
-                a.unit(),
-                b.zero());
-    }
-
-    @Override
-    public Dual<F> nan() {
-        return new Dual<F>(
-                a.nan(),
-                b.nan());
-    }
-
-    @Override
-    public Dual<F> zero() {
-        return new Dual<F>(
-                a.zero(),
-                b.zero());
-    }
-
-    @Override
-    protected Dual<F> plus(Dual<F> e) {
-        return new Dual<F>(
-                a.add(e.a),
-                b.add(e.b));
-    }
-
-    @Override
-    protected Dual<F> negate() {
-        return new Dual<F>(
-                a.neg(),
-                b.neg());
-    }
-
-    @Override
     public int compareTo(Dual<F> o) {
         int ca = a.compareTo(o.a);
         int cb = b.compareTo(o.b);
         return (ca == 0 && cb == 0) ? 0 : 1;
+    }
+
+    @Override
+    Dual<F> createInstance(F a, F b) {
+        return new Dual<F>(a, b);
     }
 
 }

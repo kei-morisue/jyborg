@@ -5,11 +5,6 @@ import cyborg.math.alg.field.FieldSqr;
 public class Complex<F extends FieldSqr<F>>
         extends Binarion<F, Complex<F>> {
 
-    @Deprecated
-    public Complex() {
-        super();
-    }
-
     public Complex(F a) {
         super(a, a.zero());
     }
@@ -71,38 +66,10 @@ public class Complex<F extends FieldSqr<F>>
     }
 
     @Override
-    public Complex<F> unit() {
-        return new Complex<F>(
-                a.unit(),
-                b.zero());
-    }
-
-    @Override
     public Complex<F> nan() {
         return new Complex<F>(
                 a.nan(),
                 b.nan());
-    }
-
-    @Override
-    public Complex<F> zero() {
-        return new Complex<F>(
-                a.zero(),
-                b.zero());
-    }
-
-    @Override
-    protected Complex<F> plus(Complex<F> e) {
-        return new Complex<F>(
-                a.add(e.a),
-                b.add(e.b));
-    }
-
-    @Override
-    protected Complex<F> negate() {
-        return new Complex<F>(
-                a.neg(),
-                b.neg());
     }
 
     @Override
@@ -116,6 +83,11 @@ public class Complex<F extends FieldSqr<F>>
             return ca;
         }
         return 1;
+    }
+
+    @Override
+    Complex<F> createInstance(F a, F b) {
+        return new Complex<F>(a, b);
     }
 
 }
