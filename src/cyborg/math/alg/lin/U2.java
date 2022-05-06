@@ -2,79 +2,120 @@ package cyborg.math.alg.lin;
 
 import cyborg.math.alg.field.FieldSqr;
 
-public class U2<F extends FieldSqr<F>, V extends V2D<F, V>>
+public final class U2<F extends FieldSqr<F>, V extends V2D<F, V>>
         extends Matrix<F, V, U2<F, V>> {
+    final private V ab;
+    final private boolean isNegDet;
+
+    // (a, b; -b, a) : positive determinant
+    // (a, b; b, -a) : negative determinant
+    // , (a, b) is an unit vector
+    public U2(V ab, boolean isNegDet) {
+        F nrmSq = ab.nrmSq();
+        F unit = nrmSq.unit();
+        if (nrmSq.equals(unit)) {
+            this.ab = ab;
+            this.isNegDet = isNegDet;
+            return;
+        }
+        this.ab = ab.nan();
+        this.isNegDet = false;
+    }
+
+    private V cd() {
+        V n = ab.n();
+        return (isNegDet) ? n.neg() : n;
+    }
 
     @Override
     public boolean isNan() {
-        // TODO 自動生成されたメソッド・スタブ
-        return false;
+        return ab.isNan();
     }
 
     @Override
     public U2<F, V> nan() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return new U2<F, V>(ab.nan(), false);
     }
 
     @Override
     public V apply(V v) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return v.createInstance(
+                ab.prd(v),
+                cd().prd(v));
     }
 
     @Override
     public U2<F, V> apply(U2<F, V> m) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return new U2<F, V>(
+                m.trps().apply(trps().ab),
+                isNegDet ^ m.isNegDet);
     }
 
     @Override
     public U2<F, V> idt() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return new U2<F, V>(ab.ex(), false);
     }
 
     @Override
     public F det() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        F unit = ab.x.unit();
+        return isNegDet
+                ? unit.neg()
+                : unit;
     }
 
     @Override
     public U2<F, V> inv() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return trps();
     }
 
     @Override
     public U2<F, V> trps() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return isNegDet
+                ? this
+                : new U2<F, V>(
+                        ab.createInstance(
+                                ab.x,
+                                ab.y.neg()),
+                        false);
     }
 
+    @Deprecated
     @Override
     public U2<F, V> scale(F f) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return nan();
     }
 
+    @Deprecated
     @Override
     public U2<F, V> zero() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return nan();
     }
 
+    @Deprecated
     @Override
     protected U2<F, V> plus(U2<F, V> e) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return nan();
     }
 
     @Override
     protected U2<F, V> negate() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
+        return new U2<F, V>(ab.neg(), isNegDet);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        @SuppressWarnings("unchecked")
+        U2<F, V> u2 = (U2<F, V>) obj;
+        return ab.equals(u2.ab)
+                && isNegDet == u2.isNegDet;
+    }
+
+    @Override
+    public String toString() {
+        return ab.toString() + "; " + cd();
+    }
 }
