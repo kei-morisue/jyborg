@@ -4,9 +4,9 @@ import cyborg.math.alg.field.FieldSqr;
 
 public abstract class AbstractM2x2<F extends FieldSqr<F>, V extends V2D<F, V>>
         extends Matrix<F, V, AbstractM2x2<F, V>> {
-    protected abstract V ab();
+    public abstract V ab();
 
-    protected abstract V cd();
+    public abstract V cd();
 
     public V ac() {
         return trps().ab();
@@ -105,10 +105,14 @@ public abstract class AbstractM2x2<F extends FieldSqr<F>, V extends V2D<F, V>>
 
     @Override
     public String toString() {
-        return ab().toString() + "; " + cd().toString();
+        return toString(ab()) + "; " + toString(cd());
     }
 
     private AbstractM2x2<F, V> id2() {
         return createInstance(ab().ex(), ab().ey());
+    }
+
+    private String toString(V v) {
+        return v.x.toString() + ", " + v.y.toString();
     }
 }

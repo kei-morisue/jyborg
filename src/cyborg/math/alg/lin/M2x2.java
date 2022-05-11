@@ -24,12 +24,12 @@ public class M2x2<F extends FieldSqr<F>, V extends V2D<F, V>>
     }
 
     @Override
-    protected V ab() {
+    public V ab() {
         return ab;
     }
 
     @Override
-    protected V cd() {
+    public V cd() {
         return cd;
     }
 

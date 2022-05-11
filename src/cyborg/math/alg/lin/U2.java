@@ -47,7 +47,7 @@ public final class U2<F extends FieldSqr<F>, V extends V2D<F, V>>
     @Override
     public U2<F, V> apply(U2<F, V> m) {
         return new U2<F, V>(
-                m.trps().apply(trps().ab),
+                m.trps().apply(ab),
                 isNegDet ^ m.isNegDet);
     }
 
@@ -116,6 +116,10 @@ public final class U2<F extends FieldSqr<F>, V extends V2D<F, V>>
 
     @Override
     public String toString() {
-        return ab.toString() + "; " + cd();
+        return toString(ab) + "; " + toString(cd());
+    }
+
+    private String toString(V v) {
+        return v.x + "," + v.y;
     }
 }

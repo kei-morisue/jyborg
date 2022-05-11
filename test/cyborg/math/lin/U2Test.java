@@ -61,7 +61,7 @@ public class U2Test {
     void applyTest2() {
         assertEquals(
                 mx(
-                        dir(-63L, -16L),
+                        dir(-33L, 56L),
                         true),
                 m.apply(n));
     }
@@ -73,6 +73,24 @@ public class U2Test {
                         dir(-63L, -16L),
                         true),
                 n.apply(m));
+    }
+
+    @Test
+    void applyTest4() {
+        assertEquals(
+                mx(
+                        dir(1L, 0L),
+                        false),
+                n.apply(n.inv()));
+    }
+
+    @Test
+    void applyTest5() {
+        assertEquals(
+                mx(
+                        dir(1L, 0L),
+                        false),
+                m.apply(m.inv()));
     }
 
     @Test

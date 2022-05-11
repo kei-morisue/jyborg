@@ -81,8 +81,8 @@ public class DirTest {
     void ketbraTest1() {
         M2x2<Frac, Dir<Frac>> c = u.ketbra(v);
         assertEquals(mx(
-                dir(12L, 9L),
-                dir(-8L, -6L)), c);
+                dir(12L, -8L),
+                dir(9L, -6L)), c);
     }
 
     private static Dir<Frac> dir(long x, long y) {

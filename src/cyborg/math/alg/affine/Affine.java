@@ -5,10 +5,10 @@ import cyborg.math.alg.lin.Matrix;
 import cyborg.math.alg.lin.Vector;
 
 public abstract class Affine<F extends FieldSqr<F>, V extends Vector<F, V>, M extends Matrix<F, V, M>> {
-    private M a;
-    private V b;
+    protected M a;
+    protected V b;
 
-    public Affine(M a, V b) {
+    protected Affine(M a, V b) {
         setA(a);
         setB(b);
     }
@@ -19,7 +19,7 @@ public abstract class Affine<F extends FieldSqr<F>, V extends Vector<F, V>, M ex
     };
 
     // this o t
-    public Affine<F, V, M> cmps(Affine<F, V, M> t) {
+    public Affine<F, V, M> apply(Affine<F, V, M> t) {
         return createInstance(
                 a.apply(t.a),
                 b.add(a.apply(t.b)));
@@ -32,11 +32,12 @@ public abstract class Affine<F extends FieldSqr<F>, V extends Vector<F, V>, M ex
                 inv.apply(b).neg());
     }
 
-    public abstract void setA(Matrix<F, V, M> a);
+    public abstract void setA(M a);
 
     public abstract void setB(V b);
 
     public abstract Affine<F, V, M> createInstance(
-            Matrix<F, V, M> a,
+            M a,
             V b);
+
 }

@@ -64,8 +64,8 @@ public abstract class V2D<F extends FieldSqr<F>, V extends V2D<F, V>>
 
     final public M2x2<F, V> ketbra(V v) {
         return new M2x2<F, V>(
-                scale(v.x),
-                scale(v.y));
+                v.scale(x),
+                v.scale(y));
     }
 
     final public V ex() {

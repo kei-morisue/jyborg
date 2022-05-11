@@ -1,8 +1,5 @@
-package cyborg.kami.ori;
+package cyborg.kami.geo;
 
-import cyborg.kami.geo.Line;
-import cyborg.kami.geo.Seg;
-import cyborg.kami.geo.D0Vertex;
 import cyborg.math.alg.field.FieldSqr;
 
 public interface Axiom<F extends FieldSqr<F>> {
