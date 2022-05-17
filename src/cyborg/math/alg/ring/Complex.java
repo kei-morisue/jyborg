@@ -30,12 +30,12 @@ public class Complex<F extends FieldSqr<F>>
         }
         F aa = a.pow(2);
         F bb = b.pow(2);
-        F d = aa.add(bb.x(4));
+        F d = aa.add(bb.mul(4));
         F sqrD = d.sqr();
         if (sqrD.isNan()) {
             return nan();
         }
-        d = aa.add(sqrD).div(a.unit().x(2));
+        d = aa.add(sqrD).div(a.unit().mul(2));
         sqrD = d.sqr();
         if (sqrD.isNan()) {
             return nan();

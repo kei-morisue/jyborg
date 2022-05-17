@@ -51,4 +51,22 @@ public abstract class D0<F extends FieldSqr<F>, D extends D0<F, D>>
     public void setY(F y) {
         this.y = y;
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        D0<F, D> d0 = (D0<F, D>) obj;
+        return x.equals(d0.x) && y.equals(d0.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return x.hashCode() * 17 + y.hashCode();
+    }
 }

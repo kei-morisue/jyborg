@@ -11,7 +11,7 @@ public class FieldTest {
     @Test
     void xTest1() {
         final Frac a = new Frac(24, 3);
-        final Frac b = a.x(2);
+        final Frac b = a.mul(2);
         assertEquals(16, b.getN());
         assertEquals(1, b.getD());
     }
@@ -20,7 +20,7 @@ public class FieldTest {
     @Test
     void xTest2() {
         final Frac a = new Frac(24, 5);
-        final Frac b = a.x(2);
+        final Frac b = a.mul(2);
         assertEquals(48, b.getN());
         assertEquals(5, b.getD());
     }
@@ -29,7 +29,7 @@ public class FieldTest {
     @Test
     void xTest3() {
         final Frac a = new Frac(24, 5);
-        final Frac b = a.x(5);
+        final Frac b = a.mul(5);
         assertEquals(24, b.getN());
         assertEquals(1, b.getD());
     }
@@ -38,7 +38,7 @@ public class FieldTest {
     @Test
     void xTest4() {
         final Frac a = new Frac(24, 3);
-        final Frac b = a.x(-3);
+        final Frac b = a.mul(-3);
         assertEquals(-24L, b.getN());
         assertEquals(1L, b.getD());
     }
@@ -47,7 +47,7 @@ public class FieldTest {
     @Test
     void xTest5() {
         final Frac a = new Frac(24, 5);
-        final Frac b = a.x(-5);
+        final Frac b = a.mul(-5);
         assertEquals(-24L, b.getN());
         assertEquals(1L, b.getD());
     }
@@ -56,7 +56,7 @@ public class FieldTest {
     @Test
     void xTest6() {
         final Frac a = new Frac(24, 5);
-        final Frac b = a.x(0);
+        final Frac b = a.mul(0);
         assertEquals(0L, b.getN());
         assertEquals(1L, b.getD());
     }
@@ -65,7 +65,7 @@ public class FieldTest {
     @Test
     void xTest7() {
         final Frac a = new Frac(24, 5);
-        final Frac b = a.x(256);
+        final Frac b = a.mul(256);
         assertEquals(24L * 256L, b.getN());
         assertEquals(5L, b.getD());
     }
@@ -113,5 +113,21 @@ public class FieldTest {
         final Frac b = a.pow(-0);
         assertEquals(1L, b.getN());
         assertEquals(1L, b.getD());
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void divTest1() {
+        final Frac a = new Frac(24, 5);
+        final Frac b = a.div(5);
+        assertEquals(24L, b.getN());
+        assertEquals(25L, b.getD());
+    }
+
+    @Test
+    void divTest2() {
+        final Frac a = new Frac(24, 5);
+        final Frac b = a.div(0);
+        assertEquals(b.nan(), b);
     }
 }

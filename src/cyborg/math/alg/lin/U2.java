@@ -103,15 +103,23 @@ public final class U2<F extends FieldSqr<F>, V extends V2D<F, V>>
         return new U2<F, V>(ab.neg(), isNegDet);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj.getClass() != getClass()) {
             return false;
         }
-        @SuppressWarnings("unchecked")
         U2<F, V> u2 = (U2<F, V>) obj;
         return ab.equals(u2.ab)
                 && isNegDet == u2.isNegDet;
+    }
+
+    @Override
+    public int hashCode() {
+        return ab.hashCode() * 17 + Boolean.hashCode(isNegDet);
     }
 
     @Override

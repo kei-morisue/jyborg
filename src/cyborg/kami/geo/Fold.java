@@ -18,13 +18,15 @@ public class Fold<F extends FieldSqr<F>>
     private static <E extends FieldSqr<E>> U2<E, Dir<E>> u(
             AbstractM2x2<E, Dir<E>> p) {
         Dir<E> ab = p.ab();
-        return new U2<E, Dir<E>>(ab.ex().sub(ab.x(2)), true);
+        return new U2<E, Dir<E>>(
+                ab.ex().sub(ab.mul(2)),
+                true);
     }
 
     private static <E extends FieldSqr<E>, V extends D0<E, V>> Dir<E> w(
             AbstractM2x2<E, Dir<E>> p,
             V s) {
-        return p.x(2).apply(s.dir());
+        return p.mul(2).apply(s.dir());
     }
 
     private static <E extends FieldSqr<E>, V extends D0<E, V>> AbstractM2x2<E, Dir<E>> proj(
@@ -35,19 +37,32 @@ public class Fold<F extends FieldSqr<F>>
         return n.ketbra(n).scale(n.nrmSq().inv());
     }
 
-    public <V extends D0<F, V>> Fold(
-            V p0,
-            V p1,
-            V p2,
-            V v0,
-            V v1,
-            V v2) {
+    private Fold(
+            D0Point<F> p0,
+            D0Point<F> p1,
+            D0Point<F> p2,
+            D0Vertex<F> v0,
+            D0Vertex<F> v1,
+            D0Vertex<F> v2) {
         super(u(
                 p1.dir(p0),
                 p2.dir(p0),
                 v1.dir(v0),
                 v2.dir(v0)), null);
         this.b = v0.dir().sub(this.a.apply(p0.dir()));
+    }
+
+    public Fold(
+            D0Vertex<F> v0,
+            D0Vertex<F> v1,
+            D0Vertex<F> v2) {
+        this(
+                v0.getPt(),
+                v1.getPt(),
+                v2.getPt(),
+                v0,
+                v1,
+                v2);
     }
 
     private static <E extends FieldSqr<E>> U2<E, Dir<E>> u(
@@ -84,14 +99,22 @@ public class Fold<F extends FieldSqr<F>>
         return new Fold<F>(a, b);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj.getClass() != getClass()) {
             return false;
         }
-        @SuppressWarnings("unchecked")
         Fold<F> t = (Fold<F>) obj;
         return a.equals(t.a) && b.equals(t.b);
+    }
+
+    @Override
+    public int hashCode() {
+        return a.hashCode() * 17 + b.hashCode();
     }
 
     @Override

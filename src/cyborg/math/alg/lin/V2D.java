@@ -35,6 +35,12 @@ public abstract class V2D<F extends FieldSqr<F>, V extends V2D<F, V>>
                 y.nan());
     }
 
+    public V div(int d) {
+        return createInstance(
+                x.div(d),
+                y.div(d));
+    }
+
     @Override
     final public F nrm() {
         return nrmSq().sqr();
@@ -104,14 +110,22 @@ public abstract class V2D<F extends FieldSqr<F>, V extends V2D<F, V>>
                 y.neg());
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     final public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj.getClass() != this.getClass()) {
             return false;
         }
-        @SuppressWarnings("unchecked")
         V2D<F, V> v = (V2D<F, V>) obj;
         return v.x.equals(x) && v.y.equals(y);
+    }
+
+    @Override
+    public int hashCode() {
+        return x.hashCode() * 17 + y.hashCode();
     }
 
     @Deprecated

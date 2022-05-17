@@ -77,6 +77,14 @@ public class DirTest {
         assertEquals(new Frac(1L), c.getY());
     }
 
+    @SuppressWarnings("deprecation")
+    @Test
+    void divTest1() {
+        Dir<Frac> c = u.div(2);
+        assertEquals(new Frac(2L), c.getX());
+        assertEquals(new Frac(3L, 2L), c.getY());
+    }
+
     @Test
     void ketbraTest1() {
         M2x2<Frac, Dir<Frac>> c = u.ketbra(v);

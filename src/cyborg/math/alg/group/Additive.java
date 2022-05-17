@@ -24,14 +24,14 @@ public abstract class Additive<E extends Additive<E>>
         return this.add(e.neg());
     };
 
-    @SuppressWarnings("unchecked")
-    final public E x(int s) {
+    final public E mul(int s) {
+        E zero = zero();
         if (s == 0) {
-            return zero();
+            return zero;
         }
         return (s > 0)
-                ? times((E) this, zero(), s)
-                : times((E) this, zero(), -s).neg();
+                ? times(add(zero), zero, s)
+                : times(add(zero), zero, -s).neg();
     }
 
     final private E times(E t, E e, int s) {

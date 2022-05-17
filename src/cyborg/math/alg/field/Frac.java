@@ -125,4 +125,9 @@ public final class Frac
         return n + (d == 1 ? "" : "/" + d);
     }
 
+    @Override
+    protected int getHash() {
+        return (int) (n * 17L + d);
+    }
+
 }

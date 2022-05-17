@@ -6,16 +6,13 @@ public class Split<F extends FieldSqr<F>>
         extends Binarion<F, Split<F>> {
     private F r;
 
-    public Split(F v, F r) {
-        super(v, v.zero());
-        if (r.sqr().isNan()) {
-            r = v.nan();
-        }
+    public Split(F a, F r) {
+        super(a, a.zero());
         this.r = r;
     }
 
-    public Split(F v, F d, F r) {
-        super(v, d);
+    public Split(F a, F b, F r) {
+        super(a, b);
         this.r = r;
     }
 
@@ -55,15 +52,15 @@ public class Split<F extends FieldSqr<F>>
         if (s.isNan()) {
             return nan();
         }
-        F t = a.add(s).div(r.x(2)).sqr();
+        F t = a.add(s).div(r.mul(2)).sqr();
         if (t.isNan()) {
-            t = a.sub(s).div(r.x(2)).sqr();
+            t = a.sub(s).div(r.mul(2)).sqr();
             if (t.isNan()) {
                 return nan();
             }
         }
         return new Split<F>(
-                b.div(t.x(2)),
+                b.div(t.mul(2)),
                 t,
                 r);
 

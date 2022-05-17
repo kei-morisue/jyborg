@@ -22,7 +22,7 @@ public class Dual<F extends FieldSqr<F>>
         F sqr = a.sqr();
         return new Dual<F>(
                 sqr,
-                b.div(sqr.x(2)));
+                b.div(sqr.mul(2)));
     }
 
     @Override

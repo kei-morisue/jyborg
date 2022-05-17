@@ -77,4 +77,9 @@ public final class Real
     public String toString() {
         return v.toString();
     }
+
+    @Override
+    protected int getHash() {
+        return v.hashCode();
+    }
 }

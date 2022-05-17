@@ -34,14 +34,18 @@ public abstract class Field<E extends Field<E>>
         return this.mul(e.inv());
     }
 
-    @SuppressWarnings("unchecked")
+    final public E div(int e) {
+        return this.div(unit().mul(e));
+    }
+
     final public E pow(int s) {
+        E unit = unit();
         if (s == 0) {
-            return unit();
+            return unit;
         }
         return (s > 0)
-                ? power((E) this, unit(), s)
-                : power((E) this, unit(), -s).inv();
+                ? power(mul(unit), unit, s)
+                : power(mul(unit), unit, -s).inv();
     }
 
     final private E power(E t, E e, int s) {
@@ -54,9 +58,19 @@ public abstract class Field<E extends Field<E>>
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (getClass() != obj.getClass()) {
             return false;
         }
         return compareTo((E) obj) == 0;
     }
+
+    @Override
+    public int hashCode() {
+        return getHash();
+    }
+
+    protected abstract int getHash();
 }

@@ -34,9 +34,18 @@ class FoldTest {
         final D0Point<Frac> p0 = pt(-1L, -1L);
         final D0Point<Frac> p1 = pt(-1L, 1L);
         final D0Point<Frac> p2 = pt(1L, 1L);
-        final D0Point<Frac> v0 = pt(f(-6L, 5L), f(-6L, 5L));
-        final D0Point<Frac> v1 = pt(f(0L, 1L), f(2L, 5L));
-        final D0Point<Frac> v2 = pt(f(8L, 5L), f(-4L, 5L));
+        final D0Vertex<Frac> v0 = new D0Vertex<Frac>(
+                f(-6L, 5L),
+                f(-6L, 5L),
+                p0);
+        final D0Vertex<Frac> v1 = new D0Vertex<Frac>(
+                f(0L, 1L),
+                f(2L, 5L),
+                p1);
+        final D0Vertex<Frac> v2 = new D0Vertex<Frac>(
+                f(8L, 5L),
+                f(-4L, 5L),
+                p2);
 
         assertEquals(
                 new Fold<Frac>(
@@ -49,9 +58,6 @@ class FoldTest {
                                 f(1L, 5L),
                                 f(-1L, 1L))),
                 new Fold<Frac>(
-                        p0,
-                        p1,
-                        p2,
                         v0,
                         v1,
                         v2));
@@ -62,11 +68,6 @@ class FoldTest {
         return new D0Point<Frac>(
                 new Frac(x),
                 new Frac(y));
-    }
-
-    private static D0Point<Frac> pt(
-            Frac x, Frac y) {
-        return new D0Point<Frac>(x, y);
     }
 
     private static Frac f(

@@ -75,7 +75,7 @@ class DualTest {
     void mulTest3() {
         final Dual<Frac> c = IDENT.mul(IDENT);
         assertEquals(X.pow(2), c.getA());
-        assertEquals(X.x(2), c.getB());
+        assertEquals(X.mul(2), c.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -84,7 +84,7 @@ class DualTest {
         final Dual<Frac> a = IDENT.mul(IDENT);
         final Dual<Frac> c = IDENT.mul(a);
         assertEquals(X.pow(3), c.getA());
-        assertEquals(X.pow(2).x(3), c.getB());
+        assertEquals(X.pow(2).mul(3), c.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -93,7 +93,7 @@ class DualTest {
         final Dual<Frac> a = IDENT.mul(IDENT);
         final Dual<Frac> c = a.mul(KONST);
         assertEquals(K.mul(X.pow(2)), c.getA());
-        assertEquals(K.mul(X).x(2), c.getB());
+        assertEquals(K.mul(X).mul(2), c.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -143,7 +143,7 @@ class DualTest {
     void invTest4() {
         final Dual<Frac> a = IDENT.mul(IDENT).inv();
         assertEquals(X.pow(-2), a.getA());
-        assertEquals(X.pow(-3).x(-2), a.getB());
+        assertEquals(X.pow(-3).mul(-2), a.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -153,7 +153,7 @@ class DualTest {
         Frac x2k = X.pow(2).mul(K);
         Frac x3k = X.mul(x2k);
         assertEquals(x2k.inv(), a.getA());
-        assertEquals(x3k.inv().x(-2), a.getB());
+        assertEquals(x3k.inv().mul(-2), a.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -180,7 +180,7 @@ class DualTest {
         final Dual<Frac> a = IDENT.sqr();
         Frac sqr = X.sqr();
         assertEquals(sqr, a.getA());
-        assertEquals(sqr.x(2).inv(), a.getB());
+        assertEquals(sqr.mul(2).inv(), a.getB());
     }
 
     @SuppressWarnings("deprecation")
@@ -189,7 +189,7 @@ class DualTest {
         final Dual<Frac> a = KONST.add(IDENT).sqr();
         Frac sqrXK = X.add(K).sqr();
         assertEquals(sqrXK, a.getA());
-        assertEquals(sqrXK.x(2).inv(), a.getB());
+        assertEquals(sqrXK.mul(2).inv(), a.getB());
     }
 
     @SuppressWarnings("deprecation")

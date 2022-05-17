@@ -81,4 +81,10 @@ public abstract class Binarion<F extends FieldSqr<F>, B extends Binarion<F, B>>
         }
         return a.toString() + ", " + b.toString();
     }
+
+    @Override
+    protected int getHash() {
+        return a.hashCode() * 17 + b.hashCode();
+    }
+
 }

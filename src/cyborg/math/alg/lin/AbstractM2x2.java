@@ -91,14 +91,22 @@ public abstract class AbstractM2x2<F extends FieldSqr<F>, V extends V2D<F, V>>
                 cd().neg());
     };
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj.getClass() != getClass()) {
             return false;
         }
-        @SuppressWarnings("unchecked")
         AbstractM2x2<F, V> m = (AbstractM2x2<F, V>) obj;
         return ab().equals(m.ab()) && cd().equals(m.cd());
+    }
+
+    @Override
+    public int hashCode() {
+        return ab().hashCode() * 17 + cd().hashCode();
     }
 
     public abstract AbstractM2x2<F, V> createInstance(V ab, V cd);
