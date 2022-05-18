@@ -12,11 +12,15 @@ public abstract class Field<E extends Field<E>>
 
     @Override
     final public E mul(E e) {
-        return isNan(e) ? nan() : multiply(e);
+        return e.isNan() ? nan() : multiply(e);
     }
 
     final public boolean isNeg() {
-        return compareTo(zero()) < 0;
+        return isSmaller(zero());
+    }
+
+    final public boolean isSmaller(E e) {
+        return compareTo(e) < 0;
     }
 
     protected abstract E multiply(E e);

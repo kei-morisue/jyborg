@@ -35,15 +35,15 @@ public abstract class V2D<F extends FieldSqr<F>, V extends V2D<F, V>>
                 y.nan());
     }
 
-    public V div(int d) {
-        return createInstance(
-                x.div(d),
-                y.div(d));
-    }
-
     @Override
     final public F nrm() {
         return nrmSq().sqr();
+    }
+
+    final public V div(int d) {
+        return createInstance(
+                x.div(d),
+                y.div(d));
     }
 
     final public F nrmSq() {
@@ -53,11 +53,6 @@ public abstract class V2D<F extends FieldSqr<F>, V extends V2D<F, V>>
     // gets an orthogonal V2D: (-y, x)
     final public V n() {
         return createInstance(y.neg(), x);
-    }
-
-    // gets (y, x)
-    final public V yx() {
-        return createInstance(y, x);
     }
 
     final public boolean isPerp(V v) {

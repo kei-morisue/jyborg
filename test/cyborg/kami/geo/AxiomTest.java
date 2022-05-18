@@ -122,6 +122,67 @@ public class AxiomTest {
                 line);
     }
 
+    @Test
+    void axiom5Test1() {
+        final D0Point<Split<Frac>> p1 = split(200L, -50L, 3L);
+        final D0Point<Split<Frac>> p2 = split(-100L, -100L, 3L);
+        final D0Point<Split<Frac>> q2 = split(-100L, 150L, 3L);
+        final D0Point<Split<Frac>> r = split(0L, -50L, 3L);
+
+        Line<Split<Frac>, D0Point<Split<Frac>>> line = Axiom.apply(
+                p1,
+                new Seg<Split<Frac>, D0Point<Split<Frac>>>(
+                        p2,
+                        q2),
+                r,
+                false);
+        assertEquals(
+                new Line<Split<Frac>, D0Point<Split<Frac>>>(
+                        r,
+                        split(1L, 1L, 3L).dir()),
+                line);
+    }
+
+    @Test
+    void axiom5Test2() {
+        final D0Point<Split<Frac>> p1 = split(200L, -50L, 3L);
+        final D0Point<Split<Frac>> p2 = split(-100L, -100L, 3L);
+        final D0Point<Split<Frac>> q2 = split(-100L, 150L, 3L);
+        final D0Point<Split<Frac>> r = split(0L, -50L, 3L);
+
+        Line<Split<Frac>, D0Point<Split<Frac>>> line = Axiom.apply(
+                p1,
+                new Seg<Split<Frac>, D0Point<Split<Frac>>>(
+                        p2,
+                        q2),
+                r,
+                true);
+        assertEquals(
+                new Line<Split<Frac>, D0Point<Split<Frac>>>(
+                        r,
+                        split(1L, -1L, 3L).dir()),
+                line);
+    }
+
+    @Test
+    void axiom5Test3() {
+        final D0Point<Split<Frac>> p1 = split(50L, -50L, 3L);
+        final D0Point<Split<Frac>> p2 = split(-100L, -100L, 3L);
+        final D0Point<Split<Frac>> q2 = split(-100L, 150L, 3L);
+        final D0Point<Split<Frac>> r = split(0L, -50L, 3L);
+
+        Line<Split<Frac>, D0Point<Split<Frac>>> line = Axiom.apply(
+                p1,
+                new Seg<Split<Frac>, D0Point<Split<Frac>>>(
+                        p2,
+                        q2),
+                r,
+                true);
+        assertEquals(
+                null,
+                line);
+    }
+
     private static D0Point<Split<Frac>> split(
             long x,
             long y) {
@@ -132,6 +193,20 @@ public class AxiomTest {
                 new Split<Frac>(
                         new Frac(y),
                         new Frac(2L)));
+        return p1;
+    }
+
+    private static D0Point<Split<Frac>> split(
+            long x,
+            long y,
+            long r) {
+        final D0Point<Split<Frac>> p1 = new D0Point<Split<Frac>>(
+                new Split<Frac>(
+                        new Frac(x),
+                        new Frac(r)),
+                new Split<Frac>(
+                        new Frac(y),
+                        new Frac(r)));
         return p1;
     }
 

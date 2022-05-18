@@ -52,13 +52,30 @@ public class Axiom {
                 isAlt ? dm : dp);
     }
 
-    // Axiom 3
+    // Axiom 5
     public static <F extends FieldSqr<F>, V extends D0<F, V>> Line<F, V> apply(
             V p1,
             Seg<F, V> seg2,
             V r,
             boolean isAlt) {
-        //TODO
-        return null;
+        V p2 = seg2.p;
+        Dir<F> e1 = p1.dir(p2);
+        Dir<F> ez = r.dir(p2);
+        Dir<F> d2 = seg2.d();
+        F det = d2.prd(ez).pow(2)
+                .sub(d2.nrmSq().mul(e1.prd(ez).mul(2).sub(e1.nrmSq())));
+        if (det.isNeg()) {
+            return null;
+        }
+        F sqr = det.sqr();
+        if (sqr.isNan()) {
+            return null;
+        }
+        F a = isAlt
+                ? d2.prd(ez).sub(sqr).div(d2.nrmSq())
+                : d2.prd(ez).add(sqr).div(d2.nrmSq());
+        return new Line<F, V>(
+                r,
+                e1.div(2).sub(ez).add(d2.scale(a.div(2))));
     }
 }

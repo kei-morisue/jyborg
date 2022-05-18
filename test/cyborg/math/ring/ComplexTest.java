@@ -59,7 +59,6 @@ class ComplexTest {
                 c.getB());
     }
 
-    @SuppressWarnings("deprecation")
     @Test
     void invTest2() {
         final Complex<Frac> c1 = complex(0L, 0L);
@@ -68,7 +67,6 @@ class ComplexTest {
         assert (c.isNan());
     }
 
-    @SuppressWarnings("deprecation")
     @Test
     void sqrTest1() {
         final Complex<Frac> c1 = complex(-42L, 4242L);

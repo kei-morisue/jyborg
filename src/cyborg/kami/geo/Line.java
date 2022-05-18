@@ -3,8 +3,8 @@ package cyborg.kami.geo;
 import cyborg.math.alg.field.FieldSqr;
 
 public class Line<F extends FieldSqr<F>, V extends D0<F, V>> {
-    private V p;
-    private Dir<F> d;
+    V p;
+    Dir<F> d;
 
     public Line(V p, Dir<F> d) {
         this.p = p;

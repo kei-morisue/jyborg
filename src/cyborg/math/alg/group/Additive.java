@@ -3,7 +3,7 @@ package cyborg.math.alg.group;
 public abstract class Additive<E extends Additive<E>>
         implements AbelianGroup<E> {
     final public E add(E e) {
-        return isNan(e) ? nan() : plus(e);
+        return e.isNan() ? nan() : plus(e);
     }
 
     public abstract E zero();
@@ -15,10 +15,6 @@ public abstract class Additive<E extends Additive<E>>
     protected abstract E plus(E e);
 
     protected abstract E negate();
-
-    final protected boolean isNan(E e) {
-        return e.isNan() || this.isNan();
-    }
 
     final public E sub(E e) {
         return this.add(e.neg());

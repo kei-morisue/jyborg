@@ -2,8 +2,6 @@ package cyborg.math.num;
 
 import java.util.Arrays;
 
-import cyborg.math.ana.nm.Newton;
-
 public class PerfectSquare {
     private static Long[] m256 = { 0L, 1L, 4L, 9L, 16L, 17L, 25L, 33L, 36L, 41L,
             49L, 57L,
@@ -21,9 +19,28 @@ public class PerfectSquare {
             return n;
         }
         if (Arrays.asList(m256).contains(n % 256L)) {
-            return Newton.apply(n);
+            return nm(n);
         }
         return -1L;
+    }
+
+    private static long nm(long c) {
+        long e = c;
+        for (int i = 0; i < 100; i++) {
+            long next = next(e, c);
+            if (next * next == c) {
+                return next;
+            }
+            if (next == e) {
+                --next;
+            }
+            e = next;
+        }
+        return -1L;
+    }
+
+    private static long next(long e, long c) {
+        return (e * e + c) / 2L / e;
     }
 
 }

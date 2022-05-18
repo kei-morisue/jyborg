@@ -38,7 +38,7 @@ public abstract class AbstractM2x2<F extends FieldSqr<F>, V extends V2D<F, V>>
 
     @Override
     public AbstractM2x2<F, V> idt() {
-        return id2();
+        return createInstance(ab().ex(), ab().ey());
     }
 
     @Override
@@ -114,10 +114,6 @@ public abstract class AbstractM2x2<F extends FieldSqr<F>, V extends V2D<F, V>>
     @Override
     public String toString() {
         return toString(ab()) + "; " + toString(cd());
-    }
-
-    private AbstractM2x2<F, V> id2() {
-        return createInstance(ab().ex(), ab().ey());
     }
 
     private String toString(V v) {

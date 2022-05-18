@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import cyborg.math.num.PerfectSquare;
-
 public class PerfectSquareTest {
     private static long LARGE_LONG = 2645L;
 
@@ -39,4 +37,10 @@ public class PerfectSquareTest {
     void test6() {
         assertEquals(-1L, PerfectSquare.apply(255L));
     }
+
+    @Test
+    void test7() {
+        assertEquals(-1L, PerfectSquare.apply(800000000L));
+    }
+
 }
