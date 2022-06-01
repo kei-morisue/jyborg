@@ -34,13 +34,16 @@ public class PerfectSquare {
             if (next == e) {
                 --next;
             }
-            e = next;
+            e = next == e
+                    ? e - 1
+                    : next;
         }
         return -1L;
     }
 
     private static long next(long e, long c) {
-        return (e * e + c) / 2L / e;
+        long de = (e * e - c) / e >> 1;
+        return e - de;
     }
 
 }

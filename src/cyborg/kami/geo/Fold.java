@@ -38,12 +38,12 @@ public class Fold<F extends FieldSqr<F>>
     }
 
     private Fold(
-            D0Point<F> p0,
-            D0Point<F> p1,
-            D0Point<F> p2,
-            D0Vertex<F> v0,
-            D0Vertex<F> v1,
-            D0Vertex<F> v2) {
+            Pt<F> p0,
+            Pt<F> p1,
+            Pt<F> p2,
+            Vx<F> v0,
+            Vx<F> v1,
+            Vx<F> v2) {
         super(u(
                 p1.dir(p0),
                 p2.dir(p0),
@@ -53,9 +53,9 @@ public class Fold<F extends FieldSqr<F>>
     }
 
     public Fold(
-            D0Vertex<F> v0,
-            D0Vertex<F> v1,
-            D0Vertex<F> v2) {
+            Vx<F> v0,
+            Vx<F> v1,
+            Vx<F> v2) {
         this(
                 v0.getPt(),
                 v1.getPt(),

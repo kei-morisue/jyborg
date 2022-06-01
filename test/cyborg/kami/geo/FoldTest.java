@@ -8,8 +8,8 @@ import cyborg.math.alg.field.Frac;
 import cyborg.math.alg.lin.U2;
 
 class FoldTest {
-    static final D0Point<Frac> s = pt(-1L, 4L);
-    static final D0Point<Frac> e = pt(5L, 12L);
+    static final Pt<Frac> s = pt(-1L, 4L);
+    static final Pt<Frac> e = pt(5L, 12L);
     static final Fold<Frac> f = f(s, e);
 
     @SuppressWarnings("deprecation")
@@ -31,18 +31,18 @@ class FoldTest {
     @SuppressWarnings("deprecation")
     @Test
     void foldTest2() {
-        final D0Point<Frac> p0 = pt(-1L, -1L);
-        final D0Point<Frac> p1 = pt(-1L, 1L);
-        final D0Point<Frac> p2 = pt(1L, 1L);
-        final D0Vertex<Frac> v0 = new D0Vertex<Frac>(
+        final Pt<Frac> p0 = pt(-1L, -1L);
+        final Pt<Frac> p1 = pt(-1L, 1L);
+        final Pt<Frac> p2 = pt(1L, 1L);
+        final Vx<Frac> v0 = new Vx<Frac>(
                 f(-6L, 5L),
                 f(-6L, 5L),
                 p0);
-        final D0Vertex<Frac> v1 = new D0Vertex<Frac>(
+        final Vx<Frac> v1 = new Vx<Frac>(
                 f(0L, 1L),
                 f(2L, 5L),
                 p1);
-        final D0Vertex<Frac> v2 = new D0Vertex<Frac>(
+        final Vx<Frac> v2 = new Vx<Frac>(
                 f(8L, 5L),
                 f(-4L, 5L),
                 p2);
@@ -63,9 +63,9 @@ class FoldTest {
                         v2));
     }
 
-    private static D0Point<Frac> pt(
+    private static Pt<Frac> pt(
             long x, long y) {
-        return new D0Point<Frac>(
+        return new Pt<Frac>(
                 new Frac(x),
                 new Frac(y));
     }
@@ -76,8 +76,8 @@ class FoldTest {
     }
 
     private static Fold<Frac> f(
-            D0Point<Frac> s,
-            D0Point<Frac> e) {
+            Pt<Frac> s,
+            Pt<Frac> e) {
         return new Fold<Frac>(s, e);
     }
 
