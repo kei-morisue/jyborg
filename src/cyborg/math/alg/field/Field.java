@@ -19,6 +19,14 @@ public abstract class Field<E extends Field<E>>
         return isSmaller(zero());
     }
 
+    final public E abs() {
+        return isNan()
+                ? nan()
+                : isNeg()
+                        ? neg()
+                        : add(zero());
+    }
+
     final public boolean isSmaller(E e) {
         return compareTo(e) < 0;
     }

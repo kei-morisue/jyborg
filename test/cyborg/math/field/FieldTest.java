@@ -130,4 +130,29 @@ public class FieldTest {
         final Frac b = a.div(0);
         assertEquals(b.nan(), b);
     }
+
+    @Test
+    void absTest1() {
+        final Frac a = new Frac(0, 5);
+        assertEquals(new Frac(0, 1), a.abs());
+    }
+
+    @Test
+    void absTest2() {
+        final Frac a = new Frac(14, 5);
+        assertEquals(new Frac(14, 5), a.abs());
+    }
+
+    @Test
+    void absTest3() {
+        final Frac a = new Frac(-14, 2);
+        assertEquals(new Frac(7, 1), a.abs());
+    }
+
+    @Test
+    void absTest4() {
+        final Frac a = new Frac(-14, -2);
+        assertEquals(a.nan(), a.abs());
+    }
+
 }
